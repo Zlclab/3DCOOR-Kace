@@ -200,7 +200,6 @@ class Constructor:
         f1 = metrics.f1_score(y_true=ground_label_array, y_pred=predicted_value_rounded)
         ap = metrics.average_precision_score(y_true=ground_label_array, y_score=np.array(predicted_value))
 
-        # 打印各项指标
         print(sn, sp, mcc, acc, auroc, f1, ap)
         return sn, sp, mcc, acc, auroc, f1, ap
 
@@ -235,16 +234,16 @@ def act( ):
     a2=0.8
     a3=1
 
-    # data1 =pd.read_csv(r"D:\software\biostatistics\data_set\Protein\Camellia\biCLb62CCq.csv")  # 数据，第一列为标签，后面为特征
+
     Y, X1, X2, X3, X4, X5, X6, X7, X8, N1, N2, N3, N4, N5, N6 ,EJS, EBC, ED = seq_stru_feature(path,prop,a1,a2,a3)
 
 
-    # 标签
+    
     # Y = pd.read_csv('labels.csv')
     Y = np.array(Y)
     Y = Y.reshape((Y.shape[0], 1))
 
-    # 序列
+    # sequence feature
     X1 = np.array(X1)
     seq_num = X1.shape[0]
     data_bi = X1.reshape((seq_num,L ,-1 ))
@@ -278,8 +277,9 @@ def act( ):
 
     Xs_size = Xs.shape[2]
 
-
-    # 点
+    # network-derived structure feature
+    
+    # Node importance feature
     N1 = np.array(N1)
     data_PG = N1.reshape((seq_num, L, -1))
 
@@ -299,7 +299,7 @@ def act( ):
     data_DC = N6.reshape((seq_num, L, -1))
 
     Xnn = np.concatenate((data_PG, data_CL, data_CC, data_BC, data_EC, data_DC), axis=2)
-    # 边
+    # edge importance feature
     data_ejs =np.array(EJS)
     data_ebc = np.array(EBC)
     data_ed = np.array(ED)
@@ -312,7 +312,7 @@ def act( ):
 
 
 
-    # k-folds cross-validation
+    # 10-folds cross-validation
     indices = np.arange(seq_num)
     np.random.seed(0)
     np.random.shuffle(indices)
