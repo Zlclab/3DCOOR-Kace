@@ -1,6 +1,6 @@
 # 3DCOOR-Kace
 
-## 10-fold cross-validation
+10-fold cross-validation
 
 dataset Triticum_aestivum_21.fasta  
 
